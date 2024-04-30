@@ -21,9 +21,6 @@ public class ingredientsController {
     @Autowired
     private IngredientsService ingredientsService;
 
-    @Autowired
-    private IngredientsRequest ingredientsRequest;
-
     @PostMapping("/category")
     private ResponseEntity<IngredientsCategory> createIngredientsCategory(@RequestBody IngredientsCategoryRequest req) throws Exception {
         IngredientsCategory item=ingredientsService.createIngredientsCategory(req.getName(), req.getRestaurantId());
@@ -33,9 +30,10 @@ public class ingredientsController {
 
     @PostMapping()
     private ResponseEntity<IngredientsItem> createIngredientsItem(@RequestBody IngredientsRequest req) throws Exception {
-        IngredientsItem item=ingredientsService.createIngredientsItem(req.getRestaurantId(), req.getName(),req.getCategoryId());
+        IngredientsItem item = ingredientsService.createIngredientsItem(req.getRestaurantId(), req.getName(), req.getCategoryId());
         return new ResponseEntity<>(item, HttpStatus.CREATED);
     }
+
 
     @PutMapping("/{id}/stoke")
     private ResponseEntity<IngredientsItem> updateStock(@PathVariable Long id) throws Exception {
